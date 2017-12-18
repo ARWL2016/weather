@@ -14,14 +14,14 @@ body {
 .app {
   border: 1px dotted green;
   height: 100%;
-  display: flex;
+  @include flexbox();
   flex-direction: column;
   height: 100vh;
 }
 
 .content {
   border: 1px dotted blue;
-  flex: 1 0 auto;
+  @include flex(1 0 auto);
 
 }
 
@@ -39,11 +39,56 @@ h1 {
   font-size: 1.6rem;
 }
 
+// FORM
+
+form {
+  padding: 20px;
+  border: 1px dotted grey;
+  margin: 0 auto;
+}
+
+.form-input, .form-btn {
+  display: block;
+}
+
+.form-label-wrapper {
+  margin-bottom: 5px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-required {
+  float: right;
+  color: red;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.form-input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.form-btn {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 8px 30px;
+}
+
+
+
 
 // FOOTER
 footer {
   background-color: lightgreen;
 }
+
+
 
 .footer-author {
   text-align: center;
