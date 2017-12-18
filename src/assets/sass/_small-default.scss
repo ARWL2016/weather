@@ -8,11 +8,11 @@ body {
   // background-color: lightseagreen;
   font-family: $defaultFont;
   font-size: 16px;
-  border: 1px dotted red;
+  // border: 1px dotted red;
 }
 
 .app {
-  border: 1px dotted green;
+  // border: 1px dotted green;
   height: 100%;
   @include flexbox();
   flex-direction: column;
@@ -20,7 +20,7 @@ body {
 }
 
 .content {
-  border: 1px dotted blue;
+  // border: 1px dotted blue;
   @include flex(1 0 auto);
 
 }
@@ -29,10 +29,10 @@ body {
 // HEADER
 
 header {
-  background-color: lightgreen;
+  background-color: $sunshine;
 
   h1 {
-    color: $highlight-color;
+    // color: $highlight-color;
     text-align: center;
     padding: 10px;
     font-size: 1.6rem;
@@ -40,13 +40,13 @@ header {
 }
 
 
-
 // FORM
 
 form {
   padding: 20px;
-  border: 1px dotted grey;
+  // border: 1px dotted grey;
   margin: 0 auto;
+  max-width: $contentMaxWidth;
 
   input {
     display: block;
@@ -61,7 +61,7 @@ form {
 
     span {
       float: right;
-      color: red;
+      color: darkred;
       font-weight: bold;
       font-size: 0.8rem;
       padding-top: 3px;
@@ -72,7 +72,7 @@ form {
     padding: 10px;
     width: 100%;
     // border-radius: 5px;
-    border: 1px solid grey;
+    // border: 1px solid grey;
   }
 
   .help {
@@ -83,61 +83,103 @@ form {
 
   .form-btn {
     border: 1px solid grey;
+    background-color: $darkgrey;
     border-radius: 5px;
-    font-weight: bold;
+    color: white;
+    // font-weight: bold;
     margin-top: 8px;
     padding: 8px 30px;
   }
-
-
 }
 
 
-// RESULTS 
+// RESULTS
+
 
 .result-wrapper {
-  border: 1px dotted grey;
+  // border: 1px dotted grey;
   padding: 20px;
+  max-width: $contentMaxWidth;
+  margin: 0 auto;
 
-  li {
-    list-style-type: none;
-    padding: 5px;
+  .result-title {
+    padding: 10px;
+    text-align: center;
+    background-color: $sunshine;
+
+    h2 {
+      font-size: 1.5rem;
+    }
   }
-	
-	.placename {
-		font-size: 1.2rem;
-		font-weight: bold;
-	}
-	
-	.temperature {
-		font-size: 2.2rem; 
-		font-weight: bold;
-	}
-	
-	.description {
-		
-	}
+
+  .result-summary-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .result-summary {
+    width: 50%;
+    float: left;
+    padding: 30px 10px;
+
+    .temperature {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .description {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+  }
+
+  .result-icon {
+    width: 50%;
+    float: left;
+    // border: 1px dotted lightblue;
+
+    img {
+      height: 6rem;
+      margin: 10px auto;
+      display: block;
+    }
+  }
+
+  .result-details {
+    h3 {
+      text-align: center;
+      padding-top: 15px;
+    }
+
+    ul {
+      padding-left: 15px;
+    }
+    li {
+      list-style-type: none;
+      line-height: 1.5rem;
+    }
+  }
+
+
+
 
 }
-
-
-
-
-
-
-
-
 
 
 // FOOTER
 footer {
-  background-color: lightgreen;
+  background-color: $darkgrey;
+
+  .footer-author {
+    text-align: center;
+    color: white;
+    padding: 15px;
+    font-size: 0.9rem;
+  }
 }
 
 
 
-.footer-author {
-  text-align: center;
-  padding: 5px;
-  font-size: 0.8rem;
-}

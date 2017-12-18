@@ -23,23 +23,43 @@
           <div v-show="helpText" class="help">{{helpText}}</div>
           <input
             type="submit"
-            value="SEARCH"
+            value="Search"
             class="form-btn"
             v-on:click.prevent="submit"
             >
         </form>
-        <section class="result">
-          <div v-if="weatherData.name" class="result-wrapper">
-						<img v-bind:alt="weatherData.weather[0].description" 
-								 v-bind:src="'//openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'">
 
-            <ul>
-              <li class="placename">Weather for {{ weatherData.name }}</li>
-              <li class="temperature">{{ weatherData.main.temp }} </li>
-              <li class="description">{{ weatherData.weather[0].main }}</li>
-            </ul>
-						
-						
+        <section class="results-section">
+
+          <div v-if="data.name" class="result-wrapper">
+
+            <div class="result-title">
+              <h2>Weather for {{ data.name }}</h2>
+            </div>
+
+            <div class="result-summary-wrapper">
+
+              <div class="result-summary">
+                <p class="temperature">{{ celcius }}&deg;{{tempSymbol}}</p>
+                <p class="description">{{ data.weather[0].main }}</p>
+              </div>
+              <div class="result-icon">
+                <img v-bind:alt="data.weather[0].description"
+								 v-bind:src="'//openweathermap.org/img/w/' + data.weather[0].icon + '.png'">
+              </div>
+            </div>
+            <div class="result-details">
+              <h3>Details</h3>
+              <hr>
+              <ul>
+                <li>Pressure {{data.main.pressure}} hPA</li>
+                <li>Humidity {{data.main.humidity}} %</li>
+                <li>Wind speed {{data.wind.speed}} m/s</li>
+                <li>Max temperature {{data.main.temp_max}}</li>
+                <li>Max temperature {{data.main.temp_min}}</li>
+              </ul>
+            </div>
+
           </div>
 
         </section>
@@ -49,7 +69,7 @@
 
 
     <footer>
-      <p class="footer-author">Coded by Alistair Willis</p>
+      <p class="footer-author">Coded by Alistair Willis using Vue.js</p>
     </footer>
 
 
@@ -62,14 +82,20 @@ export default {
   data () {
     return {
       searchTerm: '',
-      weatherData: {
+      data: {
         name: '',
         main: {
-          temperature: ''
+          temp: ''
         },
         weather: [{main: ''}]
       },
+      tempSymbol: 'C',
       helpText: ''
+    }
+  },
+  computed: {
+    celcius: function() {
+      return Math.round(this.data.main.temp - 273.15);
     }
   },
   methods: {
@@ -84,13 +110,13 @@ export default {
 
     },
     fetchData() {
-      this.weatherData = {};
+      this.data = {};
       this.$http.get(`weather/${this.searchTerm}`)
         .then(response => {
           return response.json();
         })
         .then(data => {
-          this.weatherData = data;
+          this.data = data;
           console.log(data);
         })
         .catch(e => {

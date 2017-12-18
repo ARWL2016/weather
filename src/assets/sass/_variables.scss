@@ -1,6 +1,7 @@
-$highlight-color: #187463;
+$darkgrey: #232323;
 $sunshine: rgb(233, 200, 91);
 $defaultFont: 'Lato', sans-serif;
+$contentMaxWidth: 500px;
 
 @mixin flexbox() {
   display: -webkit-box;
