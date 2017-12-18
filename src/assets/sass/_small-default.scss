@@ -92,16 +92,31 @@ form {
 
 }
 
+
+// RESULTS 
+
 .result-wrapper {
   border: 1px dotted grey;
   padding: 20px;
 
   li {
-    font-size: 1.2rem;
-    font-weight: bold;
     list-style-type: none;
     padding: 5px;
   }
+	
+	.placename {
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+	
+	.temperature {
+		font-size: 2.2rem; 
+		font-weight: bold;
+	}
+	
+	.description {
+		
+	}
 
 }
 

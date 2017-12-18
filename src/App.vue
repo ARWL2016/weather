@@ -30,13 +30,16 @@
         </form>
         <section class="result">
           <div v-if="weatherData.name" class="result-wrapper">
+						<img v-bind:alt="weatherData.weather[0].description" 
+								 v-bind:src="'//openweathermap.org/img/w/' + weatherData.weather[0].icon + '.png'">
 
             <ul>
-              <li>{{ weatherData.name }}</li>
-              <li>{{ weatherData.main.temp }} </li>
-              <li>{{ weatherData.weather[0].main }}</li>
+              <li class="placename">Weather for {{ weatherData.name }}</li>
+              <li class="temperature">{{ weatherData.main.temp }} </li>
+              <li class="description">{{ weatherData.weather[0].main }}</li>
             </ul>
-
+						
+						
           </div>
 
         </section>
@@ -58,7 +61,6 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       searchTerm: '',
       weatherData: {
         name: '',
