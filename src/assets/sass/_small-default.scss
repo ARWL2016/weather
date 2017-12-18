@@ -29,15 +29,17 @@ body {
 // HEADER
 
 header {
-  background-color: lightgreen
+  background-color: lightgreen;
+
+  h1 {
+    color: $highlight-color;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.6rem;
+  }
 }
 
-h1 {
-  color: $highlight-color;
-  text-align: center;
-  padding: 10px;
-  font-size: 1.6rem;
-}
+
 
 // FORM
 
@@ -45,40 +47,69 @@ form {
   padding: 20px;
   border: 1px dotted grey;
   margin: 0 auto;
+
+  input {
+    display: block;
+  }
+
+  .label-wrapper {
+    margin-bottom: 5px;
+
+    label {
+      font-weight: bold;
+    }
+
+    span {
+      float: right;
+      color: red;
+      font-weight: bold;
+      font-size: 0.8rem;
+      padding-top: 3px;
+    }
+  }
+
+  .form-input {
+    padding: 10px;
+    width: 100%;
+    // border-radius: 5px;
+    border: 1px solid grey;
+  }
+
+  .help {
+    padding: 5px;
+    font-weight: bold;
+    background-color: $sunshine;
+  }
+
+  .form-btn {
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 8px;
+    padding: 8px 30px;
+  }
+
+
 }
 
-.form-input, .form-btn {
-  display: block;
+.result-wrapper {
+  border: 1px dotted grey;
+  padding: 20px;
+
+  li {
+    font-size: 1.2rem;
+    font-weight: bold;
+    list-style-type: none;
+    padding: 5px;
+  }
+
 }
 
-.form-label-wrapper {
-  margin-bottom: 5px;
-}
 
-.form-label {
-  font-weight: bold;
-}
 
-.form-required {
-  float: right;
-  color: red;
-  font-weight: bold;
-  font-size: 0.8rem;
-}
 
-.form-input {
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid grey;
-}
 
-.form-btn {
-  border: 1px solid grey;
-  border-radius: 5px;
-  margin-top: 5px;
-  padding: 8px 30px;
-}
+
 
 
 
