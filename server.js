@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const rp = require('request-promise');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const app = express();
-const port = process.env.PORT || 4200;
+app.use(compression());
+app.use(helmet());
+const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

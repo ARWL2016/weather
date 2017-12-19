@@ -5,14 +5,12 @@ html {
 }
 
 body {
-  // background-color: lightseagreen;
   font-family: $defaultFont;
   font-size: 16px;
-  // border: 1px dotted red;
+  background-color: #eee;
 }
 
 .app {
-  // border: 1px dotted green;
   height: 100%;
   @include flexbox();
   flex-direction: column;
@@ -20,9 +18,8 @@ body {
 }
 
 .content {
-  // border: 1px dotted blue;
   @include flex(1 0 auto);
-
+  background-color: white;
 }
 
 
@@ -43,7 +40,6 @@ header {
 
 form {
   padding: 20px;
-  // border: 1px dotted grey;
   margin: 0 auto;
   max-width: $contentMaxWidth;
 
@@ -70,8 +66,6 @@ form {
   .form-input {
     padding: 10px;
     width: 100%;
-    // border-radius: 5px;
-    // border: 1px solid grey;
   }
 
   .help {
@@ -85,18 +79,19 @@ form {
     background-color: $darkgrey;
     border-radius: 5px;
     color: white;
-    // font-weight: bold;
     margin-top: 8px;
     padding: 8px 30px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 
 // RESULTS
 
-
 .result-wrapper {
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 40px 20px;
   max-width: $contentMaxWidth;
   margin: 0 auto;
 
@@ -135,13 +130,15 @@ form {
       padding: 6px 10px ;
       border: none;
       border-radius: 3px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
   .result-icon {
     width: 50%;
     float: left;
-    // border: 1px dotted lightblue;
 
     img {
       height: 6rem;
@@ -170,6 +167,7 @@ form {
 
     td {
       padding: 7px;
+      font-weight: bold;
     }
 
     tr:nth-child(odd) {
@@ -182,7 +180,7 @@ form {
 
     td:last-child {
       // border: 1px solid blue;
-      font-weight: bold;
+
     }
   }
 

@@ -1,13 +1,13 @@
 <template>
   <div id="app" class="app">
     <div class="content">
-      <header>
+      <header role="header">
         <h1>OPEN WEATHER</h1>
       </header>
-      <main role="content">
-        <search v-on:searchSubmitted="fetchData"></search>
+      <main role="main">
+        <search v-on:searchSubmitted="fetchData" :null-result="nullResult"></search>
 
-        <section class="results-section">
+        <section clas="results-section">
             <div v-if="showSpinner" class="spinner">
               <div class="rect1"></div>
               <div class="rect2"></div>
@@ -48,23 +48,18 @@
                 </tr>
                 <tr>
                   <td>Cloud cover</td>
-                  <td>{{data.clouds.all}}%</td>
+                  <td>{{data.clouds.all}} %</td>
                 </tr>
               </table>
             </div>
           </div>
         </section>
       </main>
-
     </div>
-
-
     <footer>
       <p>Coded by Alistair Willis using Vue.js</p>
-      <p>View the source on <a href="https://github.com/ARWL2016/weather" target="_blank">Github</a>.</p>
+      <p>View the source on <a href="https://github.com/ARWL2016/weather" target="_blank" rel="noopener noreferrer">Github</a>.</p>
     </footer>
-
-
   </div>
 </template>
 
@@ -79,7 +74,6 @@
     },
     data () {
       return {
-        // searchTerm: '',
         data: {
           name: '',
           main: {
@@ -89,7 +83,7 @@
         },
         displayTemp: '',
         tempSymbol: 'C',
-        // helpText: '',
+        nullResult: '',
         showSpinner: false
       }
     },
@@ -102,19 +96,9 @@
       }
     },
     methods: {
-      // submit: function() {
-      //   this.helpText = '';
-
-      //   if (this.searchTerm) {
-      //     this.fetchData();
-      //     this.showSpinner = true;
-      //   } else {
-      //     this.helpText = 'Please enter a search term';
-      //   }
-
-      // },
       fetchData(term) {
         this.showSpinner = true;
+        this.nullResult = '';
         this.data = {};
         this.$http.get(`weather/${term}`)
           .then(response => {
@@ -124,12 +108,11 @@
           .then(data => {
             this.data = data;
             this.setTemp();
-            console.log(data);
           })
           .catch(e => {
             this.showSpinner = false;
             console.log(e);
-            this.helpText = 'Sorry, your search returned no results.';
+            this.nullResult = 'Sorry, your search returned no results.';
           });
       },
       setTemp() {

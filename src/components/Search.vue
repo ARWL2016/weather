@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form novalidate>
     <div class="label-wrapper">
       <label for="locationSearch">Location</label>
       <span>required</span>
@@ -11,8 +11,10 @@
       class="form-input"
       v-model="searchTerm"
       v-on:focus="helpText = ''"
+      autocomplete="off"
       required>
-    <div v-show="helpText" class="help">{{helpText}}</div>
+    <div v-if="helpText" class="help">{{helpText}}</div>
+    <div v-else-if="nullResult" class="help">{{nullResult}}</div>
     <input
       type="submit"
       value="Search"
@@ -29,18 +31,15 @@
         helpText: ''
       }
     },
+    props: ['nullResult'],
     methods: {
       submit() {
         this.helpText = '';
-
         if (this.searchTerm) {
           this.$emit('searchSubmitted', this.searchTerm);
-          // this.fetchData();
-          // this.showSpinner = true;
         } else {
           this.helpText = 'Please enter a search term';
         }
-
       },
     }
   }

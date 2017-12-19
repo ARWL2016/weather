@@ -20,6 +20,4 @@ This app was styled using a mobile-first approach.
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 #### To do
-- refactor input element to a nested component
-- style larger pages
 - go through HTML checklist
