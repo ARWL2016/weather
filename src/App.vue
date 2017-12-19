@@ -40,24 +40,38 @@
             <div class="result-summary-wrapper">
 
               <div class="result-summary">
-                <p class="temperature">{{ celcius }}&deg;{{tempSymbol}}</p>
-                <p class="description">{{ data.weather[0].main }}</p>
+                <p class="temperature">{{ displayTemp }}&deg;{{ tempSymbol }}</p>
+                <button v-on:click="toggleCF">C / F</button>
               </div>
               <div class="result-icon">
                 <img v-bind:alt="data.weather[0].description"
 								 v-bind:src="'//openweathermap.org/img/w/' + data.weather[0].icon + '.png'">
+                 <p class="description">{{ data.weather[0].main }}</p>
               </div>
             </div>
             <div class="result-details">
-              <h3>Details</h3>
               <hr>
-              <ul>
-                <li>Pressure {{data.main.pressure}} hPA</li>
-                <li>Humidity {{data.main.humidity}} %</li>
-                <li>Wind speed {{data.wind.speed}} m/s</li>
-                <li>Max temperature {{data.main.temp_max}}</li>
-                <li>Max temperature {{data.main.temp_min}}</li>
-              </ul>
+              <h3>Details</h3>
+
+              <table>
+                <tr>
+                  <td>Pressure</td>
+                  <td>{{data.main.pressure}} hPA</td>
+                </tr>
+                <tr>
+                  <td>Humidity</td>
+                  <td>{{data.main.humidity}} %</td>
+                </tr>
+                <tr>
+                  <td>Wind speed</td>
+                  <td>{{data.wind.speed}} m/s</td>
+                </tr>
+                <tr>
+                  <td>Cloud cover</td>
+                  <td>{{data.clouds.all}}%</td>
+                </tr>
+              </table>
+
             </div>
 
           </div>
@@ -89,6 +103,7 @@ export default {
         },
         weather: [{main: ''}]
       },
+      displayTemp: '',
       tempSymbol: 'C',
       helpText: ''
     }
@@ -96,6 +111,9 @@ export default {
   computed: {
     celcius: function() {
       return Math.round(this.data.main.temp - 273.15);
+    },
+    fahrenheit: function() {
+      return Math.round((this.data.main.temp - 273.15) * (9 / 5) + 32);
     }
   },
   methods: {
@@ -117,12 +135,20 @@ export default {
         })
         .then(data => {
           this.data = data;
+          this.setTemp();
           console.log(data);
         })
         .catch(e => {
           console.log(e);
           this.helpText = 'Sorry, your search returned no results.';
         });
+    },
+    setTemp() {
+      this.displayTemp = (this.tempSymbol === 'C') ? this.celcius : this.fahrenheit;
+    },
+    toggleCF() {
+      this.tempSymbol = (this.tempSymbol === 'C') ? 'F' : 'C';
+      this.setTemp();
     }
   }
 }

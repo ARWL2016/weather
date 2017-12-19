@@ -108,7 +108,7 @@ form {
     background-color: $sunshine;
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   }
 
@@ -121,7 +121,7 @@ form {
   .result-summary {
     width: 50%;
     float: left;
-    padding: 30px 10px;
+    padding-top: 30px;
 
     .temperature {
       font-size: 3rem;
@@ -129,11 +129,17 @@ form {
       text-align: center;
     }
 
-    .description {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 5px;
+    button {
+      background-color: green;
+      color: white;
+      margin: 25px auto 10px auto;
+      display: block;
+      padding: 6px 10px ;
+      border: none;
+      border-radius: 3px;
     }
+
+
   }
 
   .result-icon {
@@ -143,23 +149,44 @@ form {
 
     img {
       height: 6rem;
-      margin: 10px auto;
+      margin: 0 auto -5px auto;
       display: block;
+    }
+
+    .description {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 0px;
     }
   }
 
   .result-details {
     h3 {
       text-align: center;
-      padding-top: 15px;
+      padding: 10px 0;
     }
 
-    ul {
-      padding-left: 15px;
+    table {
+      // border: 1px solid lightgreen;
+      margin: 0 auto;
+      width: 100%;
     }
-    li {
-      list-style-type: none;
-      line-height: 1.5rem;
+
+    td {
+      padding: 7px;
+    }
+
+    tr:nth-child(odd) {
+      background-color: $sunshine;
+    }
+
+    td:first-child {
+      // border: 1px solid red;
+    }
+
+    td:last-child {
+      // border: 1px solid blue;
+      font-weight: bold;
     }
   }
 
