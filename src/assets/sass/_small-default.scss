@@ -32,10 +32,9 @@ header {
   background-color: $sunshine;
 
   h1 {
-    // color: $highlight-color;
     text-align: center;
-    padding: 10px;
-    font-size: 1.6rem;
+    padding: 15px;
+    font-size: 1.5rem;
   }
 }
 
@@ -97,8 +96,7 @@ form {
 
 
 .result-wrapper {
-  // border: 1px dotted grey;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   max-width: $contentMaxWidth;
   margin: 0 auto;
 
@@ -138,8 +136,6 @@ form {
       border: none;
       border-radius: 3px;
     }
-
-
   }
 
   .result-icon {
@@ -149,7 +145,7 @@ form {
 
     img {
       height: 6rem;
-      margin: 0 auto -5px auto;
+      margin: 8px auto -5px auto;
       display: block;
     }
 
@@ -199,12 +195,17 @@ form {
 // FOOTER
 footer {
   background-color: $darkgrey;
+  padding: 10px;
 
-  .footer-author {
+  p {
     text-align: center;
     color: white;
-    padding: 15px;
+    margin: 5px;
     font-size: 0.9rem;
+
+    a {
+      color: inherit;
+    }
   }
 }
 

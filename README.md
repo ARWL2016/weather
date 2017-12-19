@@ -21,7 +21,5 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 
 #### To do
 - refactor input element to a nested component
-- add link to Github
-- add spinner
 - style larger pages
 - go through HTML checklist

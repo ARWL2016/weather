@@ -1,44 +1,25 @@
 <template>
   <div id="app" class="app">
-
-
     <div class="content">
       <header>
-        <h1>Open Weather</h1>
+        <h1>OPEN WEATHER</h1>
       </header>
       <main role="content">
-        <form>
-          <div class="label-wrapper">
-            <label for="locationSearch">Location</label>
-            <span>required</span>
-          </div>
-          <input
-            type="text"
-            id="locationSearch"
-            placeholder="type a location to search"
-            class="form-input"
-            v-model="searchTerm"
-            v-on:focus="helpText = ''"
-            required>
-          <div v-show="helpText" class="help">{{helpText}}</div>
-          <input
-            type="submit"
-            value="Search"
-            class="form-btn"
-            v-on:click.prevent="submit"
-            >
-        </form>
+        <search v-on:searchSubmitted="fetchData"></search>
 
         <section class="results-section">
-
+            <div v-if="showSpinner" class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
           <div v-if="data.name" class="result-wrapper">
-
             <div class="result-title">
               <h2>Weather for {{ data.name }}</h2>
             </div>
-
             <div class="result-summary-wrapper">
-
               <div class="result-summary">
                 <p class="temperature">{{ displayTemp }}&deg;{{ tempSymbol }}</p>
                 <button v-on:click="toggleCF">C / F</button>
@@ -52,7 +33,6 @@
             <div class="result-details">
               <hr>
               <h3>Details</h3>
-
               <table>
                 <tr>
                   <td>Pressure</td>
@@ -71,11 +51,8 @@
                   <td>{{data.clouds.all}}%</td>
                 </tr>
               </table>
-
             </div>
-
           </div>
-
         </section>
       </main>
 
@@ -83,7 +60,8 @@
 
 
     <footer>
-      <p class="footer-author">Coded by Alistair Willis using Vue.js</p>
+      <p>Coded by Alistair Willis using Vue.js</p>
+      <p>View the source on <a href="https://github.com/ARWL2016/weather" target="_blank">Github</a>.</p>
     </footer>
 
 
@@ -91,67 +69,78 @@
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      searchTerm: '',
-      data: {
-        name: '',
-        main: {
-          temp: ''
+  import Search from './components/Search.vue';
+
+  export default {
+
+    name: 'app',
+    components: {
+      search: Search
+    },
+    data () {
+      return {
+        // searchTerm: '',
+        data: {
+          name: '',
+          main: {
+            temp: ''
+          },
+          weather: [{main: ''}]
         },
-        weather: [{main: ''}]
-      },
-      displayTemp: '',
-      tempSymbol: 'C',
-      helpText: ''
-    }
-  },
-  computed: {
-    celcius: function() {
-      return Math.round(this.data.main.temp - 273.15);
-    },
-    fahrenheit: function() {
-      return Math.round((this.data.main.temp - 273.15) * (9 / 5) + 32);
-    }
-  },
-  methods: {
-    submit: function() {
-      this.helpText = '';
-
-      if (this.searchTerm) {
-        this.fetchData();
-      } else {
-        this.helpText = 'Please enter a search term';
+        displayTemp: '',
+        tempSymbol: 'C',
+        // helpText: '',
+        showSpinner: false
       }
+    },
+    computed: {
+      celcius: function() {
+        return Math.round(this.data.main.temp - 273.15);
+      },
+      fahrenheit: function() {
+        return Math.round((this.data.main.temp - 273.15) * (9 / 5) + 32);
+      }
+    },
+    methods: {
+      // submit: function() {
+      //   this.helpText = '';
 
-    },
-    fetchData() {
-      this.data = {};
-      this.$http.get(`weather/${this.searchTerm}`)
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          this.data = data;
-          this.setTemp();
-          console.log(data);
-        })
-        .catch(e => {
-          console.log(e);
-          this.helpText = 'Sorry, your search returned no results.';
-        });
-    },
-    setTemp() {
-      this.displayTemp = (this.tempSymbol === 'C') ? this.celcius : this.fahrenheit;
-    },
-    toggleCF() {
-      this.tempSymbol = (this.tempSymbol === 'C') ? 'F' : 'C';
-      this.setTemp();
+      //   if (this.searchTerm) {
+      //     this.fetchData();
+      //     this.showSpinner = true;
+      //   } else {
+      //     this.helpText = 'Please enter a search term';
+      //   }
+
+      // },
+      fetchData(term) {
+        this.showSpinner = true;
+        this.data = {};
+        this.$http.get(`weather/${term}`)
+          .then(response => {
+            this.showSpinner = false;
+            return response.json();
+          })
+          .then(data => {
+            this.data = data;
+            this.setTemp();
+            console.log(data);
+          })
+          .catch(e => {
+            this.showSpinner = false;
+            console.log(e);
+            this.helpText = 'Sorry, your search returned no results.';
+          });
+      },
+      setTemp() {
+        this.displayTemp = (this.tempSymbol === 'C') ? this.celcius : this.fahrenheit;
+      },
+      toggleCF() {
+        this.tempSymbol = (this.tempSymbol === 'C') ? 'F' : 'C';
+        this.setTemp();
+      }
     }
   }
-}
 </script>
 
 
