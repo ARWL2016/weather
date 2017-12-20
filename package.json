@@ -5,12 +5,16 @@
   "author": "Alistair Willis <alistairrwillis@gmail.com>",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "8.9.1"
+  },
   "scripts": {
     "devOld": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build:watch": "cross-env NODE_ENV=development webpack --watch",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "server": "nodemon server.js",
-    "dev": "npm-run-all --parallel server build:watch"
+    "dev": "npm-run-all --parallel server build:watch",
+    "start": "node server.js"
   },
   "dependencies": {
     "compression": "1.7.1",
@@ -32,6 +36,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
+    "dotenv": "4.0.0",
     "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
     "npm-run-all": "4.1.2",
